@@ -14,4 +14,5 @@ RUN npm install
  
 # Copies everything over to Docker environment
 COPY . .
- 
+
+CMD ["npm", "start"]
