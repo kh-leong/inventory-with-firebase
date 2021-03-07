@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  client:
+    image: inventory:latest
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+     - "80:3000"
+    command: "npm --prefix /usr/src/app run start"
+    volumes:
+     - "./inventory:/usr/src/app"
