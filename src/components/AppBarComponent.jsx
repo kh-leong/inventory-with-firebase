@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +54,7 @@ export default function AppBarComponent(props) {
             <Typography variant="h6" className={classes.title}>
               Inventory
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" component={Link} to="/login">Login</Button>
           </ToolBar>
         </AppBar>
       </ElevationScroll>
