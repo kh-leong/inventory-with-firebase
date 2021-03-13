@@ -3,8 +3,8 @@ import React from 'react';
 import TableComponent from './components/TableComponent';
 import AppBarComponent from './components/AppBarComponent';
 import Login from './routes/Login';
+import NotFound from './routes/NotFound';
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
@@ -20,6 +20,7 @@ class App extends React.Component {
           <Route exact path="/" component={TableComponent}/>
           <Route path="/list" component={TableComponent}/>
           <Route path="/login" component={Login}/>
+          <Route path="*" component={NotFound}/>
         </Switch>
       </header>
      </div>
