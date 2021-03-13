@@ -5,11 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import AppBarMenu from "./AppBarMenu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,9 +47,10 @@ export default function AppBarComponent(props) {
       <ElevationScroll {...props}>
         <AppBar>
           <ToolBar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <AppBarMenu/ >
+            {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography variant="h6" className={classes.title}>
               Inventory
             </Typography>
