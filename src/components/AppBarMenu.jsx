@@ -70,7 +70,7 @@ export default function AppBarMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem onClick={handleClose} component={Link} to="/list">
+        <StyledMenuItem onClick={handleClose} component={Link} to="/inventory">
           <ListItemIcon>
             <ListIcon fontSize="small" />
           </ListItemIcon>
