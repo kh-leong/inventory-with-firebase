@@ -12,6 +12,8 @@ import AppBarMenu from "./AppBarMenu";
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 import firebase from "firebase/app";
 import "firebase/auth";
+import { IconButton } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +57,10 @@ export default function AppBarComponent(props) {
     });
   }
 
+  const goToProfile = () => {
+    history.push("/profile");
+  }
+
   return (
     <div className={classes.root}>
       <ElevationScroll {...props}>
@@ -71,6 +77,9 @@ export default function AppBarComponent(props) {
               <Button color="inherit" component={Link} to="/login">Log in</Button>
             </IfFirebaseUnAuthed>
             <IfFirebaseAuthed>
+              <IconButton color="inherit" onClick={goToProfile}>
+                <AccountCircle/>
+              </IconButton>
               <Button color="inherit" onClick={logOut}>Log out</Button>
             </IfFirebaseAuthed>
           </ToolBar>

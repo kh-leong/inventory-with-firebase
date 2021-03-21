@@ -5,6 +5,7 @@ import AppBarComponent from './components/AppBarComponent';
 import Login from './routes/Login';
 import NotFound from './routes/NotFound';
 import Inventory from './routes/Inventory';
+import Profile from './routes/Profile';
 import {
   Switch,
   Route,
@@ -20,6 +21,7 @@ const App = () => {
         <Route exact path="/" component={TableComponent}/>
         <Route path="/inventory" component={Inventory}/>
         <Route path="/login" component={Login}/>
+        <Route path="/profile" component={Profile}/>
         <Route path="*" component={NotFound}/>
       </Switch>
     </header>
