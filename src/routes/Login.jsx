@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import firebase from "firebase/app";
 import "firebase/auth";
 import { IfFirebaseUnAuthed } from '@react-firebase/auth';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -20,6 +21,7 @@ export default function Login() {
   const classes = useStyles();
   const [loginID, setLoginID] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const onChangeHandler = (event) => {
     const {name, value} = event.currentTarget;
@@ -34,7 +36,9 @@ export default function Login() {
 };
 
   const signIn = () => {
-    firebase.auth().signInWithEmailAndPassword(loginID, password).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(loginID, password).then((userCredential) => {
+      history.push("/");
+    }).catch((error) => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;

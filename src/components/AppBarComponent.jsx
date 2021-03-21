@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AppBarMenu from "./AppBarMenu";
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 import firebase from "firebase/app";
@@ -44,9 +44,11 @@ ElevationScroll.propTypes = {
 
 export default function AppBarComponent(props) {
   const classes = useStyles();
+  const history = useHistory();
 
   const logOut = () => {
     firebase.app().auth().signOut();
+    history.push("/");
   }
 
   return (
