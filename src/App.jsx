@@ -10,23 +10,22 @@ import {
   Route,
 } from "react-router-dom";
 
-class App extends React.Component {
-  render() {
-    return (
-    <div className="App">
-      <AppBarComponent/>
+const App = () => {
+  return (
+  <div className="App">
+    <AppBarComponent/>
 
-      <header className="App-header">
-        <Switch>
-          <Route exact path="/" component={TableComponent}/>
-          <Route path="/inventory" component={Inventory}/>
-          <Route path="/login" component={Login}/>
-          <Route path="*" component={NotFound}/>
-        </Switch>
-      </header>
-     </div>
-    );
-  }
+    <header className="App-header">
+      <Switch>
+        <Route exact path="/" component={TableComponent}/>
+        <Route path="/inventory" component={Inventory}/>
+        <Route path="/login" component={Login}/>
+        <Route path="*" component={NotFound}/>
+      </Switch>
+    </header>
+   </div>
+  );
+  
 }
 
 export default App;
