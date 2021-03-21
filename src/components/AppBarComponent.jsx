@@ -47,8 +47,12 @@ export default function AppBarComponent(props) {
   const history = useHistory();
 
   const logOut = () => {
-    firebase.app().auth().signOut();
-    history.push("/");
+    firebase.app().auth().signOut().then(() => {
+      history.push("/");
+    }).catch((error) => {
+      alert("An error occurred while signing out.");
+      console.log(error);
+    });
   }
 
   return (
