@@ -1,11 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Lock from '@material-ui/icons/Lock';
 import Button from '@material-ui/core/Button';
+import firebase from "firebase/app";
+import "firebase/auth";
+import { IfFirebaseUnAuthed } from '@react-firebase/auth';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -15,8 +18,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [loginID, setLoginID] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.currentTarget;
+
+    if(name === 'loginid') {
+      setLoginID(value);
+      
+    }
+    else if(name === 'password'){
+      setPassword(value);
+    }
+};
+
+  const signIn = () => {
+    firebase.auth().signInWithEmailAndPassword(loginID, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+  };
 
   return (
+    <IfFirebaseUnAuthed>
     <div className={classes.margin}>
       <form className="form">
         <Grid container spacing={1} alignItems="flex-end">
@@ -24,7 +56,7 @@ export default function Login() {
             <AccountCircle />
           </Grid>
           <Grid item>
-            <TextField id="login-id" label="Login ID" required/>
+            <TextField id="login-id" name="loginid" label="Email Address" required onChange = {(event) => onChangeHandler(event)}/>
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="flex-end">
@@ -32,13 +64,14 @@ export default function Login() {
             <Lock />
           </Grid>
           <Grid item>
-            <TextField id="password" label="Password" type="password" required/>
+            <TextField id="password" name="password" label="Password" type="password" onChange = {(event) => onChangeHandler(event)}/>
           </Grid>
         </Grid>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={signIn}>
           LOG IN
         </Button>
       </form>
     </div>
+    </IfFirebaseUnAuthed>
   );
 }
