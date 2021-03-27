@@ -30,8 +30,9 @@ const columns = [
   'Num',
 ];
 
-export default function TableComponent() {
+export default function TableComponent(props) {
   const classes = useStyles();
+  const data = props.data ? props.data : rows;
 
   return (
     <TableContainer component={Paper}>
@@ -44,9 +45,9 @@ export default function TableComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow key={row.name}>
-              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.name_cn ? row.name_cn : row.name}</TableCell>
               <TableCell>{row.num}</TableCell>
             </TableRow>
           ))}

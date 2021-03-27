@@ -15,13 +15,11 @@ export default function Inventory() {
 
   return (
     <div className={classes.margin}>
-      {/* testing of firestore collection. */}
       <FirestoreCollection path="/medicine">
         {d => {
-          return d.isLoading ? console.log("Loading") : console.log(d.value);
+          return (d.isLoading ? console.log("Loading") : <TableComponent data={d.value}/>);
         }}
       </FirestoreCollection>
-      <TableComponent/>
     </div>
   );
 }
