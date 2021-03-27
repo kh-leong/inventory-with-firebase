@@ -53,29 +53,31 @@ export default function Login() {
 
   return (
     <IfFirebaseUnAuthed>
-    <div className={classes.margin}>
-      <form className="form">
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <AccountCircle />
+    {() => { return (
+      <div className={classes.margin}>
+        <form className="form">
+          <Grid container spacing={1} alignItems="flex-end">
+            <Grid item>
+              <AccountCircle />
+            </Grid>
+            <Grid item>
+              <TextField id="login-id" name="loginid" label="Email Address" required onChange = {(event) => onChangeHandler(event)}/>
+            </Grid>
           </Grid>
-          <Grid item>
-            <TextField id="login-id" name="loginid" label="Email Address" required onChange = {(event) => onChangeHandler(event)}/>
+          <Grid container spacing={1} alignItems="flex-end">
+            <Grid item>
+              <Lock />
+            </Grid>
+            <Grid item>
+              <TextField id="password" name="password" label="Password" type="password" onChange = {(event) => onChangeHandler(event)}/>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <Lock />
-          </Grid>
-          <Grid item>
-            <TextField id="password" name="password" label="Password" type="password" onChange = {(event) => onChangeHandler(event)}/>
-          </Grid>
-        </Grid>
-        <Button variant="contained" color="primary" onClick={signIn}>
-          LOG IN
-        </Button>
-      </form>
-    </div>
+          <Button variant="contained" color="primary" onClick={signIn}>
+            LOG IN
+          </Button>
+        </form>
+      </div>
+    )}}
     </IfFirebaseUnAuthed>
   );
 }

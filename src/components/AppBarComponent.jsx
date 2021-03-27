@@ -73,14 +73,20 @@ export default function AppBarComponent(props) {
             <Typography variant="h6" className={classes.title}>
               Inventory
             </Typography>
-            <IfFirebaseUnAuthed>
+            <IfFirebaseUnAuthed> 
+            { () => { return (
               <Button color="inherit" component={Link} to="/login">Log in</Button>
+            )}}
             </IfFirebaseUnAuthed>
             <IfFirebaseAuthed>
-              <IconButton color="inherit" onClick={goToProfile}>
-                <AccountCircle/>
-              </IconButton>
-              <Button color="inherit" onClick={logOut}>Log out</Button>
+            { () => { return (
+              <>
+                <IconButton color="inherit" onClick={goToProfile}>
+                  <AccountCircle/>
+                </IconButton>
+                <Button color="inherit" onClick={logOut}>Log out</Button>
+              </>
+            )}}
             </IfFirebaseAuthed>
           </ToolBar>
         </AppBar>
