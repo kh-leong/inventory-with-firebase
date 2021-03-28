@@ -68,9 +68,6 @@ export default function AppBarComponent(props) {
         <AppBar>
           <ToolBar>
             <AppBarMenu/ >
-            {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton> */}
             <Typography variant="h6" className={classes.title}>
               Inventory
             </Typography>

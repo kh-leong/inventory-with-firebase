@@ -50,13 +50,13 @@ export default function Inventory() {
   };
 
   let body;
-  if (modalType == "edit") {
+  if (modalType === "edit") {
     body = (
       <div className={classes.paper}>
         Edit
       </div>
     );
-  } else if (modalType == "delete") {
+  } else if (modalType === "delete") {
     body = (
       <div className={classes.paper}>
         Delete

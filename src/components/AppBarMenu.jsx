@@ -54,16 +54,16 @@ export default function AppBarMenu() {
 
   return (
     <div>
-    <IconButton
+      <IconButton
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
         color="inherit"
         onClick={handleClick}
-    >
-      <MenuIcon />
-    </IconButton>
-    <StyledMenu
+      >
+        <MenuIcon />
+      </IconButton>
+      <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
         keepMounted
