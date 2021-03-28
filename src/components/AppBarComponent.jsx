@@ -14,6 +14,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { IconButton } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,9 +82,11 @@ export default function AppBarComponent(props) {
             <IfFirebaseAuthed>
             { () => { return (
               <>
-                <IconButton color="inherit" onClick={goToProfile}>
-                  <AccountCircle/>
-                </IconButton>
+                <Tooltip title="Profile">
+                  <IconButton color="inherit" onClick={goToProfile}>
+                    <AccountCircle/>
+                  </IconButton>
+                </Tooltip>
                 <Button color="inherit" onClick={logOut}>Log out</Button>
               </>
             )}}

@@ -12,6 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IfFirebaseAuthed } from '@react-firebase/auth';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles({
   table: {
@@ -60,12 +61,16 @@ export default function TableComponent(props) {
                     { () => { 
                       return (
                       <>
-                        <IconButton color="inherit" variant="contained" onClick={props.onClickEdit(row)}>
-                          <EditIcon fontSize="small"/>
-                        </IconButton>
-                        <IconButton color="inherit" variant="contained" onClick={props.onClickDelete(row)}>
-                          <DeleteIcon fontSize="small"/>
-                        </IconButton>
+                        <Tooltip title="Edit">
+                          <IconButton color="inherit" variant="contained" onClick={props.onClickEdit(row)}>
+                            <EditIcon fontSize="small"/>
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Delete">
+                          <IconButton color="inherit" variant="contained" onClick={props.onClickDelete(row)}>
+                            <DeleteIcon fontSize="small"/>
+                          </IconButton>
+                        </Tooltip>
                       </>
                       );
                     }}
