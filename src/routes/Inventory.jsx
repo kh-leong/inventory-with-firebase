@@ -13,11 +13,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Inventory() {
   const classes = useStyles();
 
+  const onClickEdit = data => e => {
+    console.log("Edit");
+    console.log(data);
+  };
+
+  const onClickDelete = data => e => {
+    console.log("Delete");
+    console.log(data);
+  };
+
   return (
     <div className={classes.margin}>
       <FirestoreCollection path="/medicine">
         {d => {
-          return (d.isLoading ? console.log("Loading") : <TableComponent data={d.value}/>);
+          return (d.isLoading ? console.log("Loading") : <TableComponent data={d.value} onClickEdit={onClickEdit} onClickDelete={onClickDelete} />);
         }}
       </FirestoreCollection>
     </div>
