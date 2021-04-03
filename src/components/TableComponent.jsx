@@ -39,6 +39,7 @@ const columns = [
 export default function TableComponent(props) {
   const classes = useStyles();
   const data = props.data ? props.data : rows;
+  const type = props.type ? props.type : "normal";
   
   return (
     <TableContainer component={Paper}>
@@ -56,7 +57,7 @@ export default function TableComponent(props) {
               <TableCell>{row.name_cn ? row.name_cn : row.name}</TableCell>
               <TableCell>{row.num}</TableCell>
               <TableCell>
-                {
+                { type === "admin" ?
                   <IfFirebaseAuthed>
                     { () => { 
                       return (
@@ -69,6 +70,20 @@ export default function TableComponent(props) {
                         <Tooltip title="Delete">
                           <IconButton color="inherit" variant="contained" onClick={props.onClickDelete(row)}>
                             <DeleteIcon fontSize="small"/>
+                          </IconButton>
+                        </Tooltip>
+                      </>
+                      );
+                    }}
+                  </IfFirebaseAuthed>
+                  :
+                  <IfFirebaseAuthed>
+                    { () => { 
+                      return (
+                      <>
+                        <Tooltip title="Edit">
+                          <IconButton color="inherit" variant="contained" onClick={props.onClickEdit(row)}>
+                            <EditIcon fontSize="small"/>
                           </IconButton>
                         </Tooltip>
                       </>

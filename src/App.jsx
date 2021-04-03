@@ -10,6 +10,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 
 const App = () => {
   return (
@@ -22,6 +23,18 @@ const App = () => {
         <Route path="/inventory" component={Inventory}/>
         <Route path="/login" component={Login}/>
         <Route path="/profile" component={Profile}/>
+        <Route path="/manage_inventory">
+          <IfFirebaseAuthed>
+            {() => { return (
+              <Inventory type="admin"/>
+            )}}
+          </IfFirebaseAuthed>
+          <IfFirebaseUnAuthed>
+            {() => { return (
+              <NotFound/>
+            )}}
+          </IfFirebaseUnAuthed>
+        </Route>
         <Route path="*" component={NotFound}/>
       </Switch>
     </header>

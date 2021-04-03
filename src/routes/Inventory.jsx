@@ -4,20 +4,27 @@ import { makeStyles } from '@material-ui/core/styles';
 import TableComponent from './../components/TableComponent';
 import { FirestoreCollection } from '@react-firebase/firestore';
 import TableEditModalComponent from '../components/TableEditModalComponent';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Fab } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
 }));
 
 
-export default function Inventory() {
+export default function Inventory(props) {
   const classes = useStyles();
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const type = props.type;
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -45,10 +52,22 @@ export default function Inventory() {
     <div className={classes.margin}>
       <FirestoreCollection path="/medicine">
         {d => {
-          return (d.isLoading ? <CircularProgress/> : <TableComponent data={d.value} onClickEdit={onClickEdit} onClickDelete={onClickDelete} />);
+          return (d.isLoading ? <CircularProgress/> : <TableComponent data={d.value} onClickEdit={onClickEdit} onClickDelete={onClickDelete} type={type} />);
         }}
       </FirestoreCollection>
       <TableEditModalComponent showModal={showModal} handleCloseModal={handleCloseModal} modalType={modalType} modalData={modalData}/>
+      { type === "admin" &&
+        <Fab 
+          className={classes.fab} 
+          color="primary"
+          onClick={() => {
+            // TODO: popup for adding entries
+            console.log("Add");
+          }}
+        >
+          <Add/>
+        </Fab>
+      }
     </div>
   );
 }

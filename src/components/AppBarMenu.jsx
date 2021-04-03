@@ -10,6 +10,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import ListIcon from '@material-ui/icons/List';
+import { IfFirebaseAuthed } from '@react-firebase/auth';
+import { Security } from '@material-ui/icons';
 
 const StyledMenu = withStyles({
   paper: {
@@ -82,6 +84,17 @@ export default function AppBarMenu() {
           </ListItemIcon>
           <ListItemText primary="Orders" />
         </StyledMenuItem>
+        <IfFirebaseAuthed>
+          {/* TODO: role based auth */}
+          {() => { return (
+            <StyledMenuItem onClick={handleClose} component={Link} to="/manage_inventory">
+              <ListItemIcon>
+                <Security fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Manage Inventory" />
+            </StyledMenuItem>
+          )}}
+        </IfFirebaseAuthed>
       </StyledMenu>
     </div>
   );
