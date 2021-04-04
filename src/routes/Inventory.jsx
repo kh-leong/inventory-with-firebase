@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TableComponent from './../components/TableComponent';
+import InventoryTable from '../components/InventoryTable';
 import { FirestoreCollection } from '@react-firebase/firestore';
-import TableEditModalComponent from '../components/TableEditModalComponent';
+import InventoryModal from '../components/InventoryModal';
 import { CircularProgress, Fab } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
@@ -52,10 +52,10 @@ export default function Inventory(props) {
     <div className={classes.margin}>
       <FirestoreCollection path="/medicine">
         {d => {
-          return (d.isLoading ? <CircularProgress/> : <TableComponent data={d.value} onClickEdit={onClickEdit} onClickDelete={onClickDelete} type={type} />);
+          return (d.isLoading ? <CircularProgress/> : <InventoryTable data={d.value} onClickEdit={onClickEdit} onClickDelete={onClickDelete} type={type} />);
         }}
       </FirestoreCollection>
-      <TableEditModalComponent showModal={showModal} handleCloseModal={handleCloseModal} modalType={modalType} modalData={modalData}/>
+      <InventoryModal showModal={showModal} handleCloseModal={handleCloseModal} modalType={modalType} modalData={modalData}/>
       { type === "admin" &&
         <Fab 
           className={classes.fab} 

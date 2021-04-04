@@ -36,7 +36,7 @@ const columns = [
   '',
 ];
 
-export default function TableComponent(props) {
+export default function InventoryTable(props) {
   const classes = useStyles();
   const data = props.data ? props.data : rows;
   const type = props.type ? props.type : "normal";

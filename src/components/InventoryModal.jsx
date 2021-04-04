@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TableEditModalComponent(props) {
+export default function InventoryModal(props) {
   const classes = useStyles();
   var db = firebase.firestore();
 

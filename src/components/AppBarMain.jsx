@@ -45,7 +45,7 @@ ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
-export default function AppBarComponent(props) {
+export default function AppBarMain(props) {
   const classes = useStyles();
   const history = useHistory();
 

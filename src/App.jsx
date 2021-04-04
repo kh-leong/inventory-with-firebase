@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import AppBarComponent from './components/AppBarComponent';
+import AppBarMain from './components/AppBarMain';
 import Login from './routes/Login';
 import NotFound from './routes/NotFound';
 import Inventory from './routes/Inventory';
@@ -15,7 +15,7 @@ import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 const App = () => {
   return (
   <div className="App">
-    <AppBarComponent/>
+    <AppBarMain/>
 
     <header className="App-header">
       <Switch>
