@@ -48,6 +48,11 @@ export default function Inventory(props) {
     setModalData(data);
   };
 
+  const onClickAdd = () => {
+    setShowModal(true);
+    setModalType("add");
+  };
+
   return (
     <div className={classes.margin}>
       <FirestoreCollection path="/medicine">
@@ -60,10 +65,7 @@ export default function Inventory(props) {
         <Fab 
           className={classes.fab} 
           color="primary"
-          onClick={() => {
-            // TODO: popup for adding entries
-            console.log("Add");
-          }}
+          onClick={onClickAdd}
         >
           <Add/>
         </Fab>

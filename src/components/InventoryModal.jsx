@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core';
 import InventoryModalBodyEdit from './InventoryModalBodyEdit';
 import InventoryModalBodyDelete from './InventoryModalBodyDelete';
+import InventoryModalBodyAdd from './InventoryModalBodyAdd';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -39,7 +40,9 @@ export default function InventoryModal(props) {
               modalData={modalData}
             />
   } else if (modalType === "add") {
-    // TODO: body for add
+    body = <InventoryModalBodyAdd
+              handleCloseModal={handleCloseModal}
+            />
   } else if (modalType === "delete") {
     body = <InventoryModalBodyDelete 
               handleCloseModal={handleCloseModal}
