@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -45,7 +45,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function AppBarMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -56,8 +56,7 @@ export default function AppBarMenu() {
 
   return (
     <div>
-      <IconButton
-        aria-controls="customized-menu"
+      <IconButton aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
         color="inherit"
@@ -65,20 +64,25 @@ export default function AppBarMenu() {
       >
         <MenuIcon />
       </IconButton>
-      <StyledMenu
-        id="customized-menu"
+      <StyledMenu id="customized-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem onClick={handleClose} component={Link} to="/inventory">
+        <StyledMenuItem onClick={handleClose}
+          component={Link}
+          to="/inventory"
+        >
           <ListItemIcon>
             <ListIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Inventory" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={handleClose} component={Link} to="/orders">
+        <StyledMenuItem onClick={handleClose}
+          component={Link}
+          to="/orders"
+        >
           <ListItemIcon>
             <BorderColorIcon fontSize="small" />
           </ListItemIcon>
@@ -87,7 +91,10 @@ export default function AppBarMenu() {
         <IfFirebaseAuthed>
           {/* TODO: role based auth */}
           {() => { return (
-            <StyledMenuItem onClick={handleClose} component={Link} to="/manage_inventory">
+            <StyledMenuItem onClick={handleClose}
+              component={Link}
+              to="/manage_inventory"
+            >
               <ListItemIcon>
                 <Security fontSize="small" />
               </ListItemIcon>

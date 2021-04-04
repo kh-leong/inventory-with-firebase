@@ -57,13 +57,24 @@ export default function Inventory(props) {
     <div className={classes.margin}>
       <FirestoreCollection path="/medicine">
         {d => {
-          return (d.isLoading ? <CircularProgress/> : <InventoryTable data={d.value} onClickEdit={onClickEdit} onClickDelete={onClickDelete} type={type} />);
+          return (
+            d.isLoading ? <CircularProgress/> 
+            : 
+            <InventoryTable data={d.value}
+              onClickEdit={onClickEdit}
+              onClickDelete={onClickDelete}
+              type={type}
+            />
+          );
         }}
       </FirestoreCollection>
-      <InventoryModal showModal={showModal} handleCloseModal={handleCloseModal} modalType={modalType} modalData={modalData}/>
+      <InventoryModal showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        modalType={modalType}
+        modalData={modalData}
+      />
       { type === "admin" &&
-        <Fab 
-          className={classes.fab} 
+        <Fab className={classes.fab} 
           color="primary"
           onClick={onClickAdd}
         >

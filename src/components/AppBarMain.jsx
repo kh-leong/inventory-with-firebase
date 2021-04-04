@@ -68,25 +68,38 @@ export default function AppBarMain(props) {
         <AppBar>
           <ToolBar>
             <AppBarMenu/ >
-            <Typography variant="h6" className={classes.title}>
+            <Typography variant="h6" 
+              className={classes.title}
+            >
               Inventory
             </Typography>
             <IfFirebaseUnAuthed> 
-            { () => { return (
-              <Button color="inherit" component={Link} to="/login">Log in</Button>
-            )}}
+              { () => { return (
+                <Button color="inherit"
+                  component={Link}
+                  to="/login"
+                >
+                  Log in
+                </Button>
+              )}}
             </IfFirebaseUnAuthed>
             <IfFirebaseAuthed>
-            { () => { return (
-              <>
-                <Tooltip title="Profile">
-                  <IconButton color="inherit" onClick={goToProfile}>
-                    <AccountCircle/>
-                  </IconButton>
-                </Tooltip>
-                <Button color="inherit" onClick={logOut}>Log out</Button>
-              </>
-            )}}
+              { () => { return (
+                <>
+                  <Tooltip title="Profile">
+                    <IconButton color="inherit"
+                      onClick={goToProfile}
+                    >
+                      <AccountCircle/>
+                    </IconButton>
+                  </Tooltip>
+                  <Button color="inherit"
+                    onClick={logOut}
+                  >
+                    Log out
+                  </Button>
+                </>
+              )}}
             </IfFirebaseAuthed>
           </ToolBar>
         </AppBar>

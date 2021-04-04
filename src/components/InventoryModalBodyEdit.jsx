@@ -37,35 +37,33 @@ export default function InventoryModalBodyEdit(props) {
   };
 
   return (
-      <div className={classes.paper}>
-        Edit {modalData.name_cn}
-        <br/>
-        <TextField 
-          required name="num" 
-          label="Num" 
-          type="number" 
-          defaultValue={modalData.num} 
-          margin="normal"
-          inputRef={numRef}
-        />
-        <br/>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            // TODO: validation for TextField
-            firestoreUpdateHandler();
-            handleCloseModal();
-          }}
-        >
-          Edit
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={handleCloseModal}
-        >
-          Cancel
-        </Button>
-      </div>
+    <div className={classes.paper}>
+      Edit {modalData.name_cn}
+      <br/>
+      <TextField required
+        name="num" 
+        label="Num" 
+        type="number" 
+        defaultValue={modalData.num} 
+        margin="normal"
+        inputRef={numRef}
+      />
+      <br/>
+      <Button variant="contained"
+        color="primary"
+        onClick={() => {
+          // TODO: validation for TextField
+          firestoreUpdateHandler();
+          handleCloseModal();
+        }}
+      >
+        Edit
+      </Button>
+      <Button variant="outlined"
+        onClick={handleCloseModal}
+      >
+        Cancel
+      </Button>
+    </div>
   );
 }

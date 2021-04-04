@@ -35,25 +35,23 @@ export default function InventoryModalBodyDelete(props) {
   };
 
   return (
-      <div className={classes.paper}>
-        Delete {modalData.name_cn}?
-        <br/>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            firestoreDeleteHandler();
-            handleCloseModal();
-          }}
-        >
-          Delete
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={handleCloseModal}
-        >
-          Cancel
-        </Button>
-      </div>
+    <div className={classes.paper}>
+      Delete {modalData.name_cn}?
+      <br/>
+      <Button variant="contained"
+        color="primary"
+        onClick={() => {
+          firestoreDeleteHandler();
+          handleCloseModal();
+        }}
+      >
+        Delete
+      </Button>
+      <Button variant="outlined"
+        onClick={handleCloseModal}
+      >
+        Cancel
+      </Button>
+    </div>
   );
 }

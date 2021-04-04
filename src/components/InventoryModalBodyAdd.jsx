@@ -43,47 +43,45 @@ export default function InventoryModalBodyAdd(props) {
   };
 
   return (
-      <div className={classes.paper}>
-        Add new entry
-        <br/>
-        <TextField
-          required name="name"
-          label="Name"
-          margin="normal"
-          inputRef={nameRef}
-        />
-        <TextField
-          required name="name_cn"
-          label="Name_cn"
-          margin="normal"
-          inputRef={nameCnRef}
-        />
-        <TextField 
-          required name="num" 
-          label="Num" 
-          type="number" 
-          defaultValue={0} 
-          margin="normal"
-          inputRef={numRef}
-        />
-        <br/>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            // TODO: validation for TextFields
-            firestoreAddHandler();
-            handleCloseModal();
-          }}
-        >
-          Add
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={handleCloseModal}
-        >
-          Cancel
-        </Button>
-      </div>
+    <div className={classes.paper}>
+      Add new entry
+      <br/>
+      <TextField required
+        name="name"
+        label="Name"
+        margin="normal"
+        inputRef={nameRef}
+      />
+      <TextField required
+        name="name_cn"
+        label="Name_cn"
+        margin="normal"
+        inputRef={nameCnRef}
+      />
+      <TextField required
+        name="num" 
+        label="Num" 
+        type="number" 
+        defaultValue={0} 
+        margin="normal"
+        inputRef={numRef}
+      />
+      <br/>
+      <Button variant="contained"
+        color="primary"
+        onClick={() => {
+          // TODO: validation for TextFields
+          firestoreAddHandler();
+          handleCloseModal();
+        }}
+      >
+        Add
+      </Button>
+      <Button variant="outlined"
+        onClick={handleCloseModal}
+      >
+        Cancel
+      </Button>
+    </div>
   );
 }

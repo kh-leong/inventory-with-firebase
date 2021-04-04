@@ -56,23 +56,42 @@ export default function Login() {
     {() => { return (
       <div className={classes.margin}>
         <form className="form">
-          <Grid container spacing={1} alignItems="flex-end">
+          <Grid container
+            spacing={1}
+            alignItems="flex-end"
+          >
             <Grid item>
               <AccountCircle />
             </Grid>
             <Grid item>
-              <TextField id="login-id" name="loginid" label="Email Address" required onChange = {(event) => onChangeHandler(event)}/>
+              <TextField required
+                id="login-id"
+                name="loginid"
+                label="Email Address"
+                onChange = {(event) => onChangeHandler(event)}
+              />
             </Grid>
           </Grid>
-          <Grid container spacing={1} alignItems="flex-end">
+          <Grid container
+            spacing={1}
+            alignItems="flex-end"
+          >
             <Grid item>
               <Lock />
             </Grid>
             <Grid item>
-              <TextField id="password" name="password" label="Password" type="password" onChange = {(event) => onChangeHandler(event)}/>
+              <TextField id="password"
+                name="password"
+                label="Password"
+                type="password"
+                onChange = {(event) => onChangeHandler(event)}
+              />
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" onClick={signIn}>
+          <Button variant="contained"
+            color="primary"
+            onClick={signIn}
+          >
             LOG IN
           </Button>
         </form>

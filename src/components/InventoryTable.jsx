@@ -43,19 +43,27 @@ export default function InventoryTable(props) {
   
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="table">
+      <Table className={classes.table}
+        aria-label="table"
+      >
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell key={column}>{column}</TableCell>
+              <TableCell key={column}>
+                {column}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
             <TableRow key={row.name}>
-              <TableCell>{row.name_cn ? row.name_cn : row.name}</TableCell>
-              <TableCell>{row.num}</TableCell>
+              <TableCell>
+                {row.name_cn ? row.name_cn : row.name}
+              </TableCell>
+              <TableCell>
+                {row.num}
+              </TableCell>
               <TableCell>
                 { type === "admin" ?
                   <IfFirebaseAuthed>
@@ -63,12 +71,18 @@ export default function InventoryTable(props) {
                       return (
                       <>
                         <Tooltip title="Edit">
-                          <IconButton color="inherit" variant="contained" onClick={props.onClickEdit(row)}>
+                          <IconButton color="inherit" 
+                            variant="contained" 
+                            onClick={props.onClickEdit(row)}
+                          >
                             <EditIcon fontSize="small"/>
                           </IconButton>
                         </Tooltip>
                         <Tooltip title="Delete">
-                          <IconButton color="inherit" variant="contained" onClick={props.onClickDelete(row)}>
+                          <IconButton color="inherit"
+                            variant="contained"
+                            onClick={props.onClickDelete(row)}
+                          >
                             <DeleteIcon fontSize="small"/>
                           </IconButton>
                         </Tooltip>
@@ -82,7 +96,10 @@ export default function InventoryTable(props) {
                       return (
                       <>
                         <Tooltip title="Edit">
-                          <IconButton color="inherit" variant="contained" onClick={props.onClickEdit(row)}>
+                          <IconButton color="inherit"
+                            variant="contained"
+                            onClick={props.onClickEdit(row)}
+                          >
                             <EditIcon fontSize="small"/>
                           </IconButton>
                         </Tooltip>

@@ -35,17 +35,13 @@ export default function InventoryModal(props) {
 
   let body;
   if (modalType === "edit") {
-    body = <InventoryModalBodyEdit 
-              handleCloseModal={handleCloseModal}
+    body = <InventoryModalBodyEdit handleCloseModal={handleCloseModal}
               modalData={modalData}
             />
   } else if (modalType === "add") {
-    body = <InventoryModalBodyAdd
-              handleCloseModal={handleCloseModal}
-            />
+    body = <InventoryModalBodyAdd handleCloseModal={handleCloseModal} />
   } else if (modalType === "delete") {
-    body = <InventoryModalBodyDelete 
-              handleCloseModal={handleCloseModal}
+    body = <InventoryModalBodyDelete handleCloseModal={handleCloseModal}
               modalData={modalData}
             />
   } else {
@@ -56,8 +52,7 @@ export default function InventoryModal(props) {
   }
 
   return (
-    <Modal 
-      open={showModal}
+    <Modal open={showModal}
       onClose={handleCloseModal}
       className={classes.modal}>
       <>
