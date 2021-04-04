@@ -1,15 +1,11 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Modal, TextField } from '@material-ui/core';
-import firebase from "firebase/app";
-import "firebase/auth";
-import 'firebase/firestore';
+import { Modal } from '@material-ui/core';
+import InventoryModalBodyEdit from './InventoryModalBodyEdit';
+import InventoryModalBodyDelete from './InventoryModalBodyDelete';
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -30,88 +26,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function InventoryModal(props) {
   const classes = useStyles();
-  var db = firebase.firestore();
 
   const showModal = props.showModal;
   const handleCloseModal = props.handleCloseModal;
   const modalType = props.modalType;
   const modalData = props.modalData;
-  const numRef = useRef(null);
-
-  const firestoreUpdateHandler = () => {
-    db.collection("medicine").doc(modalData.name).set({
-      num: parseInt(numRef.current?.value),
-    }, { merge: true }).then(() => {
-      console.log("Updated " + modalData.name + "!");
-    })
-  };
-
-  const firestoreDeleteHandler = () => {
-    db.collection("medicine").doc(modalData.name).delete()
-    .then(() => {
-      console.log("Deleted " + modalData.name + "!");
-    })
-  };
 
   let body;
   if (modalType === "edit") {
-    body = (
-      <div className={classes.paper}>
-        Edit {modalData.name_cn}
-        <br/>
-        <TextField 
-          required name="num" 
-          label="Num" 
-          type="number" 
-          defaultValue={modalData.num} 
-          margin="normal"
-          inputRef={numRef}
-        />
-        <br/>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            // TODO: validation for TextField
-            firestoreUpdateHandler();
-            handleCloseModal();
-          }}
-        >
-          Edit
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={handleCloseModal}
-        >
-          Cancel
-        </Button>
-      </div>
-    );
+    body = <InventoryModalBodyEdit 
+              handleCloseModal={handleCloseModal}
+              modalData={modalData}
+            />
   } else if (modalType === "add") {
     // TODO: body for add
   } else if (modalType === "delete") {
-    body = (
-      <div className={classes.paper}>
-        Delete {modalData.name_cn}?
-        <br/>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            firestoreDeleteHandler();
-            handleCloseModal();
-          }}
-        >
-          Delete
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={handleCloseModal}
-        >
-          Cancel
-        </Button>
-      </div>
-    );
+    body = <InventoryModalBodyDelete 
+              handleCloseModal={handleCloseModal}
+              modalData={modalData}
+            />
   } else {
     body = (
       <div className={classes.paper}>
