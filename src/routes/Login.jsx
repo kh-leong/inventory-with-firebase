@@ -23,7 +23,9 @@ export default function Login() {
   const passwordRef = useRef(null);
   const history = useHistory();
 
-  const signIn = () => {
+  const onSubmit = (event) => {
+    event.preventDefault();
+
     firebase.auth().signInWithEmailAndPassword(loginIdRef.current?.value, passwordRef.current?.value).then((userCredential) => {
       history.push("/");
     }).catch((error) => {
@@ -43,7 +45,7 @@ export default function Login() {
     <IfFirebaseUnAuthed>
     {() => { return (
       <div className={classes.margin}>
-        <form className="form">
+        <form className="form" onSubmit={onSubmit}>
           <Grid container
             spacing={1}
             alignItems="flex-end"
@@ -68,7 +70,8 @@ export default function Login() {
               <Lock />
             </Grid>
             <Grid item>
-              <TextField id="password"
+              <TextField required
+                id="password"
                 name="password"
                 label="Password"
                 type="password"
@@ -78,7 +81,7 @@ export default function Login() {
           </Grid>
           <Button variant="contained"
             color="primary"
-            onClick={signIn}
+            type="submit"
           >
             LOG IN
           </Button>
