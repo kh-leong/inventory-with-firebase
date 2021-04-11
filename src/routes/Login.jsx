@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -19,31 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
-  const [loginID, setLoginID] = useState("");
-  const [password, setPassword] = useState("");
+  const loginIdRef = useRef(null);
+  const passwordRef = useRef(null);
   const history = useHistory();
 
-  const onChangeHandler = (event) => {
-    const {name, value} = event.currentTarget;
-
-    if(name === 'loginid') {
-      setLoginID(value);
-      
-    }
-    else if(name === 'password'){
-      setPassword(value);
-    }
-};
-
   const signIn = () => {
-    firebase.auth().signInWithEmailAndPassword(loginID, password).then((userCredential) => {
+    firebase.auth().signInWithEmailAndPassword(loginIdRef.current?.value, passwordRef.current?.value).then((userCredential) => {
       history.push("/");
     }).catch((error) => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode === 'auth/wrong-password') {
-        alert('Wrong password.');
+        alert('Invalid user or password.');
       } else {
         alert(errorMessage);
       }
@@ -68,7 +56,7 @@ export default function Login() {
                 id="login-id"
                 name="loginid"
                 label="Email Address"
-                onChange = {(event) => onChangeHandler(event)}
+                inputRef={loginIdRef}
               />
             </Grid>
           </Grid>
@@ -84,7 +72,7 @@ export default function Login() {
                 name="password"
                 label="Password"
                 type="password"
-                onChange = {(event) => onChangeHandler(event)}
+                inputRef={passwordRef}
               />
             </Grid>
           </Grid>
