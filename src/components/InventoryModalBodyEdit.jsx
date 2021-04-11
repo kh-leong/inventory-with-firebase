@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 import firebase from "firebase/app";
@@ -36,34 +36,55 @@ export default function InventoryModalBodyEdit(props) {
     })
   };
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const checkValidity = () => {
+    const num = numRef.current?.value;
+    if (!num || parseInt(num) < 0 || num % 1 !== 0) {
+      setErrorMessage("Number must be a positive integer")
+      return false;
+    }
+
+    setErrorMessage("");
+    return true;
+  }
+
+  const onSubmit = (event) => {
+    // prevent reloading upon submit.
+    event.preventDefault();
+    if (checkValidity()) {
+      firestoreUpdateHandler();
+      handleCloseModal();
+    }
+  }
+
   return (
     <div className={classes.paper}>
       Edit {modalData.name_cn}
       <br/>
-      <TextField required
-        name="num" 
-        label="Num" 
-        type="number" 
-        defaultValue={modalData.num} 
-        margin="normal"
-        inputRef={numRef}
-      />
-      <br/>
-      <Button variant="contained"
-        color="primary"
-        onClick={() => {
-          // TODO: validation for TextField
-          firestoreUpdateHandler();
-          handleCloseModal();
-        }}
-      >
-        Edit
-      </Button>
-      <Button variant="outlined"
-        onClick={handleCloseModal}
-      >
-        Cancel
-      </Button>
+      <form onSubmit={onSubmit}>
+        <TextField required
+          error={!!errorMessage}
+          name="num" 
+          label="Num" 
+          type="number" 
+          defaultValue={modalData.num} 
+          margin="normal"
+          inputRef={numRef}
+          helperText={errorMessage && errorMessage}
+        />
+        <br/>
+        <Button variant="contained"
+          color="primary"
+          type="submit"
+        >
+          Edit
+        </Button>
+        <Button variant="outlined"
+          onClick={handleCloseModal}
+        >
+          Cancel
+        </Button>
+      </form>
     </div>
   );
 }
