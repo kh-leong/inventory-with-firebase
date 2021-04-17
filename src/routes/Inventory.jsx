@@ -6,6 +6,7 @@ import { FirestoreCollection } from '@react-firebase/firestore';
 import InventoryModal from '../components/InventoryModal';
 import { CircularProgress, Fab } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
+import * as FirebaseConstants from '../constants/Firebase';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -55,7 +56,7 @@ export default function Inventory(props) {
 
   return (
     <div className={classes.margin}>
-      <FirestoreCollection path="/medicine">
+      <FirestoreCollection path={"/" + FirebaseConstants.INVENTORY_COLLECTION}>
         {d => {
           return (
             d.isLoading ? <CircularProgress/> 

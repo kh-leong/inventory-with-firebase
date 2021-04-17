@@ -5,6 +5,8 @@ import { Button, TextField } from '@material-ui/core';
 import firebase from "firebase/app";
 import "firebase/auth";
 import 'firebase/firestore';
+import * as FirebaseConstants from '../constants/Firebase';
+import { ERROR_MSG } from '../constants/InventoryModalBody';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,7 +31,7 @@ export default function InventoryModalBodyEdit(props) {
   const numRef = useRef(null);
 
   const firestoreUpdateHandler = () => {
-    db.collection("medicine").doc(modalData.name).set({
+    db.collection(FirebaseConstants.INVENTORY_COLLECTION).doc(modalData.name).set({
       num: parseInt(numRef.current?.value),
     }, { merge: true }).then(() => {
       console.log("Updated " + modalData.name + "!");
@@ -40,7 +42,7 @@ export default function InventoryModalBodyEdit(props) {
   const checkValidity = () => {
     const num = numRef.current?.value;
     if (!num || parseInt(num) < 0 || num % 1 !== 0) {
-      setErrorMessage("Number must be a positive integer")
+      setErrorMessage(ERROR_MSG.NUMBER_NOT_POSITIVE);
       return false;
     }
 

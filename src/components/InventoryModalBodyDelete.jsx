@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import firebase from "firebase/app";
 import "firebase/auth";
 import 'firebase/firestore';
+import * as FirebaseConstants from '../constants/Firebase';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,7 +29,7 @@ export default function InventoryModalBodyDelete(props) {
   const modalData = props.modalData;
 
   const firestoreDeleteHandler = () => {
-    db.collection("medicine").doc(modalData.name).delete()
+    db.collection(FirebaseConstants.INVENTORY_COLLECTION).doc(modalData.name).delete()
     .then(() => {
       console.log("Deleted " + modalData.name + "!");
     })

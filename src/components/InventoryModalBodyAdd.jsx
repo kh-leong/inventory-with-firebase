@@ -5,6 +5,8 @@ import { Button, TextField } from '@material-ui/core';
 import firebase from "firebase/app";
 import "firebase/auth";
 import 'firebase/firestore';
+import * as FirebaseConstants from '../constants/Firebase';
+import { ERROR_MSG } from '../constants/InventoryModalBody';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,7 +35,7 @@ export default function InventoryModalBodyAdd(props) {
     const name = nameRef.current?.value;
     const num = numRef.current?.value;
     const name_cn = nameCnRef.current?.value;
-    db.collection("medicine").doc(name).set({
+    db.collection(FirebaseConstants.INVENTORY_COLLECTION).doc(name).set({
       name: name,
       num: parseInt(num),
       name_cn: name_cn,
@@ -49,19 +51,19 @@ export default function InventoryModalBodyAdd(props) {
     let error = false;
     const num = numRef.current?.value;
     if (!num || parseInt(num) < 0 || num % 1 !== 0) {
-      setNumErrorMessage("Number must be a positive integer")
+      setNumErrorMessage(ERROR_MSG.NUMBER_NOT_POSITIVE);
       error = true;
     }
 
     const name = nameRef.current?.value;
     if (!name) {
-      setNameErrorMessage("Name cannot be empty");
+      setNameErrorMessage(ERROR_MSG.NAME_EMPTY);
       error = true;
     }
 
     const name_cn = nameCnRef.current?.value;
     if (!name_cn) {
-      setNameCnErrorMessage("NameCN cannot be empty");
+      setNameCnErrorMessage(ERROR_MSG.NAME_CN_EMPTY);
       error = true;
     }
 
