@@ -10,15 +10,27 @@ import 'firebase/firestore';
 import { FirebaseAuthProvider } from '@react-firebase/auth';
 import { FirestoreProvider } from "@react-firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBJ11xDevbg1eRozNFKjDTbbUQ79qUp2E4",
-  authDomain: "inventory-with-firebase.firebaseapp.com",
-  projectId: "inventory-with-firebase",
-  storageBucket: "inventory-with-firebase.appspot.com",
-  messagingSenderId: "901719176299",
-  appId: "1:901719176299:web:9f7274a7d839ab40de2d2e",
-  measurementId: "G-HMR3VSQKYL"
+const firebaseProdConfig = {
+  apiKey: process.env.REACT_APP_PROD_API_KEY,
+  authDomain: process.env.REACT_APP_PROD_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROD_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_PROD_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_PROD_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_PROD_APP_ID,
+  measurementId: process.env.REACT_APP_PROD_MEASUREMENT_ID
 };
+
+const firebaseDevConfig = {
+  apiKey: process.env.REACT_APP_DEV_API_KEY,
+  authDomain: process.env.REACT_APP_DEV_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_DEV_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_DEV_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_DEV_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_DEV_APP_ID,
+  measurementId: process.env.REACT_APP_DEV_MEASUREMENT_ID
+};
+
+const firebaseConfig = process.env.NODE_ENV === 'production' ? firebaseProdConfig : firebaseDevConfig;
 
 ReactDOM.render(
   <React.StrictMode>
