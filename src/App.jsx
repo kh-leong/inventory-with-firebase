@@ -8,6 +8,7 @@ import Profile from './routes/Profile';
 import Home from './routes/Home';
 import { Switch, Route } from "react-router-dom";
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
+import * as Enums from './constants/Enums';
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
         <Route path="/manage_inventory">
           <IfFirebaseAuthed>
             {() => { return (
-              <Inventory type="admin"/>
+              <Inventory type={Enums.INVENTORY_TYPE.ADMIN}/>
             )}}
           </IfFirebaseAuthed>
           <IfFirebaseUnAuthed>

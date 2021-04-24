@@ -5,6 +5,7 @@ import { Modal } from '@material-ui/core';
 import InventoryModalBodyEdit from './InventoryModalBodyEdit';
 import InventoryModalBodyDelete from './InventoryModalBodyDelete';
 import InventoryModalBodyAdd from './InventoryModalBodyAdd';
+import * as Enums from '../constants/Enums';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -34,13 +35,13 @@ export default function InventoryModal(props) {
   const modalData = props.modalData;
 
   let body;
-  if (modalType === "edit") {
+  if (modalType === Enums.MODAL_TYPE.EDIT) {
     body = <InventoryModalBodyEdit handleCloseModal={handleCloseModal}
               modalData={modalData}
             />
-  } else if (modalType === "add") {
+  } else if (modalType === Enums.MODAL_TYPE.ADD) {
     body = <InventoryModalBodyAdd handleCloseModal={handleCloseModal} />
-  } else if (modalType === "delete") {
+  } else if (modalType === Enums.MODAL_TYPE.DELETE) {
     body = <InventoryModalBodyDelete handleCloseModal={handleCloseModal}
               modalData={modalData}
             />

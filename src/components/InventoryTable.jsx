@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { IfFirebaseAuthed } from '@react-firebase/auth';
 import Tooltip from '@material-ui/core/Tooltip';
+import * as Enums from '../constants/Enums';
 
 const useStyles = makeStyles({
   table: {
@@ -39,7 +40,7 @@ const columns = [
 export default function InventoryTable(props) {
   const classes = useStyles();
   const data = props.data ? props.data : rows;
-  const type = props.type ? props.type : "normal";
+  const type = props.type ? props.type : Enums.INVENTORY_TYPE.NORMAL;
   
   return (
     <TableContainer component={Paper}>
@@ -65,7 +66,7 @@ export default function InventoryTable(props) {
                 {row.num}
               </TableCell>
               <TableCell>
-                { type === "admin" ?
+                { type === Enums.INVENTORY_TYPE.ADMIN ?
                   <IfFirebaseAuthed>
                     { () => { 
                       return (

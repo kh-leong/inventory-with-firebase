@@ -7,6 +7,7 @@ import InventoryModal from '../components/InventoryModal';
 import { CircularProgress, Fab } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 import * as FirebaseConstants from '../constants/Firebase';
+import * as Enums from '../constants/Enums';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -23,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Inventory(props) {
   const classes = useStyles();
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(null);
+  const [modalType, setModalType] = useState(Enums.MODAL_TYPE.NONE);
   const [modalData, setModalData] = useState(null);
   const type = props.type;
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setModalType(null);
+    setModalType(Enums.MODAL_TYPE.NONE);
     setModalData(null);
   };
 
@@ -37,7 +38,7 @@ export default function Inventory(props) {
     console.log("Edit");
     console.log(data);
     setShowModal(true);
-    setModalType("edit");
+    setModalType(Enums.MODAL_TYPE.EDIT);
     setModalData(data);
   };
 
@@ -45,13 +46,13 @@ export default function Inventory(props) {
     console.log("Delete");
     console.log(data);
     setShowModal(true);
-    setModalType("delete");
+    setModalType(Enums.MODAL_TYPE.DELETE);
     setModalData(data);
   };
 
   const onClickAdd = () => {
     setShowModal(true);
-    setModalType("add");
+    setModalType(Enums.MODAL_TYPE.ADD);
   };
 
   return (
@@ -74,7 +75,7 @@ export default function Inventory(props) {
         modalType={modalType}
         modalData={modalData}
       />
-      { type === "admin" &&
+      { type === Enums.INVENTORY_TYPE.ADMIN &&
         <Fab className={classes.fab} 
           color="primary"
           onClick={onClickAdd}
