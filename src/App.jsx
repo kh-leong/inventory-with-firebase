@@ -15,7 +15,7 @@ const App = () => {
   <div className="App">
     <AppBarMain/>
 
-    <header className="App-header">
+    <main className="App-body">
       <Switch>
         <Route exact
           path="/"
@@ -46,7 +46,7 @@ const App = () => {
           component={NotFound}
         />
       </Switch>
-    </header>
+    </main>
    </div>
   );
   

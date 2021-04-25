@@ -18,7 +18,11 @@ import * as Enums from '../constants/Enums';
 const useStyles = makeStyles({
   table: {
     minWidth: 350,
-  }
+  },
+  container: {
+    position: 'relative',
+    top: '100px',
+  },
 });
 
 function createData(name, num) {
@@ -43,7 +47,7 @@ export default function InventoryTable(props) {
   const type = props.type ? props.type : Enums.INVENTORY_TYPE.NORMAL;
   
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className={classes.container} component={Paper}>
       <Table className={classes.table}
         aria-label="table"
       >

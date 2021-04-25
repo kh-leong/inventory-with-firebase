@@ -14,9 +14,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   fab: {
-    position: 'absolute',
+    margin: 0,
+    top: 'auto',
+    right: theme.spacing(3),
     bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    left: 'auto',
+    position: 'fixed',
   },
 }));
 
