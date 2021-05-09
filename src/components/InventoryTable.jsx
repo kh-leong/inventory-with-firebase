@@ -14,14 +14,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { IfFirebaseAuthed } from '@react-firebase/auth';
 import Tooltip from '@material-ui/core/Tooltip';
 import * as Enums from '../constants/Enums';
+import { TablePagination } from '@material-ui/core';
 
+// TODO: fix display when resizing window
 const useStyles = makeStyles({
   table: {
-    minWidth: 350,
+    minWidth: 450,
+  },
+  root: {
+    position: 'absolute',
+    top: '40%',
+    left: '20%',
+    width: '60%',
   },
   container: {
-    position: 'relative',
-    top: '100px',
+    height: 450,
   },
 });
 
@@ -43,81 +50,105 @@ const columns = [
 
 export default function InventoryTable(props) {
   const classes = useStyles();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const data = props.data ? props.data : rows;
   const type = props.type ? props.type : Enums.INVENTORY_TYPE.NORMAL;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
   
   return (
-    <TableContainer className={classes.container} component={Paper}>
-      <Table className={classes.table}
-        aria-label="table"
-      >
-        <TableHead>
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell key={column}>
-                {column}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell>
-                {row.name_cn ? row.name_cn : row.name}
-              </TableCell>
-              <TableCell>
-                {row.num}
-              </TableCell>
-              <TableCell>
-                { type === Enums.INVENTORY_TYPE.ADMIN ?
-                  <IfFirebaseAuthed>
-                    { () => { 
-                      return (
-                      <>
-                        <Tooltip title="Edit">
-                          <IconButton color="inherit" 
-                            variant="contained" 
-                            onClick={props.onClickEdit(row)}
-                          >
-                            <EditIcon fontSize="small"/>
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Delete">
-                          <IconButton color="inherit"
-                            variant="contained"
-                            onClick={props.onClickDelete(row)}
-                          >
-                            <DeleteIcon fontSize="small"/>
-                          </IconButton>
-                        </Tooltip>
-                      </>
-                      );
-                    }}
-                  </IfFirebaseAuthed>
-                  :
-                  <IfFirebaseAuthed>
-                    { () => { 
-                      return (
-                      <>
-                        <Tooltip title="Edit">
-                          <IconButton color="inherit"
-                            variant="contained"
-                            onClick={props.onClickEdit(row)}
-                          >
-                            <EditIcon fontSize="small"/>
-                          </IconButton>
-                        </Tooltip>
-                      </>
-                      );
-                    }}
-                  </IfFirebaseAuthed>
-                }
-              </TableCell>
+    <div className={classes.root}>
+      <Paper>
+      <TableContainer className={classes.container}>
+        <Table className={classes.table} 
+          aria-label="table"
+          stickyHeader
+        >
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell key={column}>
+                  {column}
+                </TableCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {data.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((row) => (
+              <TableRow key={row.name}>
+                <TableCell>
+                  {row.name_cn ? row.name_cn : row.name}
+                </TableCell>
+                <TableCell>
+                  {row.num}
+                </TableCell>
+                <TableCell>
+                  { type === Enums.INVENTORY_TYPE.ADMIN ?
+                    <IfFirebaseAuthed>
+                      { () => { 
+                        return (
+                        <>
+                          <Tooltip title="Edit">
+                            <IconButton color="inherit" 
+                              variant="contained" 
+                              onClick={props.onClickEdit(row)}
+                            >
+                              <EditIcon fontSize="small"/>
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip title="Delete">
+                            <IconButton color="inherit"
+                              variant="contained"
+                              onClick={props.onClickDelete(row)}
+                            >
+                              <DeleteIcon fontSize="small"/>
+                            </IconButton>
+                          </Tooltip>
+                        </>
+                        );
+                      }}
+                    </IfFirebaseAuthed>
+                    :
+                    <IfFirebaseAuthed>
+                      { () => { 
+                        return (
+                        <>
+                          <Tooltip title="Edit">
+                            <IconButton color="inherit"
+                              variant="contained"
+                              onClick={props.onClickEdit(row)}
+                            >
+                              <EditIcon fontSize="small"/>
+                            </IconButton>
+                          </Tooltip>
+                        </>
+                        );
+                      }}
+                    </IfFirebaseAuthed>
+                  }
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+      </Paper>
+    </div>
   );
 }
