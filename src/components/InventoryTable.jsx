@@ -15,6 +15,7 @@ import { IfFirebaseAuthed } from '@react-firebase/auth';
 import Tooltip from '@material-ui/core/Tooltip';
 import * as Enums from '../constants/Enums';
 import { TablePagination } from '@material-ui/core';
+import InventoryTableToolbar from './InventoryTableToolbar';
 
 const useStyles = makeStyles({
   table: {
@@ -66,6 +67,7 @@ export default function InventoryTable(props) {
     <div className={classes.root}>
       <Paper>
       <TableContainer className={classes.container}>
+        <InventoryTableToolbar/>
         <Table className={classes.table} 
           aria-label="table"
           stickyHeader
