@@ -16,7 +16,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import * as Enums from '../constants/Enums';
 import { TablePagination } from '@material-ui/core';
 
-// TODO: fix display when resizing window
 const useStyles = makeStyles({
   table: {
     minWidth: 350,
