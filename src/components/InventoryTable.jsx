@@ -19,16 +19,15 @@ import { TablePagination } from '@material-ui/core';
 // TODO: fix display when resizing window
 const useStyles = makeStyles({
   table: {
-    minWidth: 450,
+    minWidth: 350,
   },
   root: {
-    position: 'absolute',
-    top: '40%',
-    left: '20%',
-    width: '60%',
+    position: 'static',
+    maxWidth: 1000,
+    margin: '0 auto',
   },
   container: {
-    height: 450,
+    minHeight: 450,
   },
 });
 

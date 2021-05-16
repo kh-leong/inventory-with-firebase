@@ -9,13 +9,14 @@ import Home from './routes/Home';
 import { Switch, Route } from "react-router-dom";
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 import * as Enums from './constants/Enums';
+import { Container } from '@material-ui/core';
 
 const App = () => {
   return (
   <div className="App">
     <AppBarMain/>
 
-    <main className="App-body">
+    <Container maxWidth={false}>
       <Switch>
         <Route exact
           path="/"
@@ -46,7 +47,7 @@ const App = () => {
           component={NotFound}
         />
       </Switch>
-    </main>
+    </Container>
    </div>
   );
   
