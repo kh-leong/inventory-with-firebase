@@ -62,6 +62,7 @@ export default function InventoryTableToolbar(props) {
             input: classes.inputInput,
           }}
           inputProps={{ 'aria-label': 'search' }}
+          onChange={props.onSearch}
         />
       </div>
     </Toolbar>

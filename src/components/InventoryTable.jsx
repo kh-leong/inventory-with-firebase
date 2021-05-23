@@ -53,6 +53,7 @@ export default function InventoryTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const data = props.data ? props.data : rows;
   const type = props.type ? props.type : Enums.INVENTORY_TYPE.NORMAL;
+  const [filteredData, setFilteredData] = React.useState(data);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -62,12 +63,26 @@ export default function InventoryTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const handleSearch = (event) => {
+    const searchField = event.target.value;
+
+    setPage(0);
+    if (searchField) {
+      // currently only searches for exact match
+      const filtered = data.filter(row => row.name.match(searchField));
+      setFilteredData(filtered);
+    }
+    else {
+      setFilteredData(data);
+    }
+  };
   
   return (
     <div className={classes.root}>
       <Paper>
       <TableContainer className={classes.container}>
-        <InventoryTableToolbar/>
+        <InventoryTableToolbar onSearch={handleSearch}/>
         <Table className={classes.table} 
           aria-label="table"
           stickyHeader
@@ -82,7 +97,7 @@ export default function InventoryTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((row) => (
+            {filteredData.slice(page * rowsPerPage, (page * rowsPerPage) + rowsPerPage).map((row) => (
               <TableRow key={row.name}>
                 <TableCell>
                   {row.name_cn ? row.name_cn : row.name}
@@ -142,7 +157,7 @@ export default function InventoryTable(props) {
       </TableContainer>
       <TablePagination rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={data.length}
+        count={filteredData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
