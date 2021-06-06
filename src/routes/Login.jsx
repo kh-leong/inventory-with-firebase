@@ -15,6 +15,29 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+  textField: {
+    color: "white",
+    "&.MuiInput-underline:before": {
+      borderBottom: "2px solid white"
+    },
+    "&.MuiInput-underline:after": {
+      borderBottom: "2px solid #3f51b5"
+    },
+    "&.MuiInput-underline:hover:before": {
+      borderBottom: "2px solid white"
+    }
+  },
+  label: {
+    "&.MuiInputLabel-root": {
+      color: "white"
+    },
+    "&:hover .MuiInputLabel-root": {
+      color: "white"
+    },
+    "&.MuiInputLabel-root.Mui-focused": {
+      color: "#3f51b5"
+    }
+  }
 }));
 
 export default function Login() {
@@ -49,6 +72,7 @@ export default function Login() {
           <Grid container
             spacing={1}
             alignItems="flex-end"
+            justify="center"
           >
             <Grid item>
               <AccountCircle />
@@ -59,12 +83,19 @@ export default function Login() {
                 name="loginid"
                 label="Email Address"
                 inputRef={loginIdRef}
+                InputProps={{
+                  className: classes.textField
+                }}
+                InputLabelProps={{
+                  className: classes.label
+                }}
               />
             </Grid>
           </Grid>
           <Grid container
             spacing={1}
             alignItems="flex-end"
+            justify="center"
           >
             <Grid item>
               <Lock />
@@ -76,9 +107,16 @@ export default function Login() {
                 label="Password"
                 type="password"
                 inputRef={passwordRef}
+                InputProps={{
+                  className: classes.textField
+                }}
+                InputLabelProps={{
+                  className: classes.label
+                }}
               />
             </Grid>
           </Grid>
+          <br/>
           <Button variant="contained"
             color="primary"
             type="submit"
