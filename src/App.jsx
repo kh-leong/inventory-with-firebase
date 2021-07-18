@@ -6,6 +6,7 @@ import NotFound from './routes/NotFound';
 import Inventory from './routes/Inventory';
 import Profile from './routes/Profile';
 import Home from './routes/Home';
+import Upload from './routes/Upload';
 import { Switch, Route } from "react-router-dom";
 import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 import * as Enums from './constants/Enums';
@@ -42,6 +43,13 @@ const App = () => {
               <NotFound/>
             )}}
           </IfFirebaseUnAuthed>
+        </Route>
+        <Route path="/upload">
+          <IfFirebaseAuthed>
+            {() => { return (
+              <Upload/>
+            )}}
+          </IfFirebaseAuthed>
         </Route>
         <Route path="*"
           component={NotFound}

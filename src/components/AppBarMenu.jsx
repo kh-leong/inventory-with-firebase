@@ -12,6 +12,7 @@ import BorderColorIcon from '@material-ui/icons/BorderColor';
 import ListIcon from '@material-ui/icons/List';
 import { IfFirebaseAuthed } from '@react-firebase/auth';
 import { Security } from '@material-ui/icons';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 const StyledMenu = withStyles({
   paper: {
@@ -99,6 +100,20 @@ export default function AppBarMenu() {
                 <Security fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Manage Inventory" />
+            </StyledMenuItem>
+          )}}
+        </IfFirebaseAuthed>
+        <IfFirebaseAuthed>
+          {/* TODO: role based auth */}
+          {() => { return (
+            <StyledMenuItem onClick={handleClose}
+              component={Link}
+              to="/upload"
+            >
+              <ListItemIcon>
+                <CloudUploadIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Upload" />
             </StyledMenuItem>
           )}}
         </IfFirebaseAuthed>
