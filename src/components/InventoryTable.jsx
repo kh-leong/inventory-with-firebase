@@ -47,6 +47,14 @@ const columns = [
   '',
 ];
 
+function createSearchRegex(searchString) {
+  // allow for any number of characters between each character in searchString
+  const quantifier = '.*';
+  const regexString = searchString.split('').join(quantifier);
+  // console.log(regexString);
+  return new RegExp(regexString);
+}
+
 export default function InventoryTable(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -69,8 +77,8 @@ export default function InventoryTable(props) {
 
     setPage(0);
     if (searchField) {
-      // currently only searches for exact match
-      const filtered = data.filter(row => row.name.match(searchField));
+      var regex = createSearchRegex(searchField);
+      const filtered = data.filter(row => row.name.match(regex));
       setFilteredData(filtered);
     }
     else {
