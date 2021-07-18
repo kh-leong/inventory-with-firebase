@@ -30,7 +30,11 @@ const firebaseDevConfig = {
   measurementId: process.env.REACT_APP_DEV_MEASUREMENT_ID
 };
 
-const firebaseConfig = process.env.NODE_ENV === 'production' ? firebaseProdConfig : firebaseDevConfig;
+var isDev = false;
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')  {
+  isDev = true;
+}
+const firebaseConfig = !isDev ? firebaseProdConfig : firebaseDevConfig;
 
 ReactDOM.render(
   <React.StrictMode>
